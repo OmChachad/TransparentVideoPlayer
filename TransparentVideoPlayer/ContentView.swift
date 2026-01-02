@@ -6,14 +6,19 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
+    @State private var player = AVPlayer(
+        url: Bundle.main.url(forResource: "AirPodsPro", withExtension: "mov")!
+    )
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            TransparentVideoPlayer(player: player)
+                .onAppear {
+                    player.play()
+                }
         }
         .padding()
     }
